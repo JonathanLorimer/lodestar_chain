@@ -1,8 +1,8 @@
-var exports = module.exports = {};
+import { initializeValues } from '../utils/utils'
 
 class AttestationSignedData{
 
-    var fields = {
+    fields = {
         // Slot number
         'slot': 'int64',
         // Shard ID
@@ -22,29 +22,20 @@ class AttestationSignedData{
         'aggregate_sig': ['int256']
     }
 
-    var defaults = {
+    defaults = {
         'slot': 0,
         'shard': 0,
         'oblique_parent_hashes': [],
-        'shard_block_hash': new Buffer(32);
+        'shard_block_hash': new Buffer(32),
         'attester_bitfield': new Buffer(),
         'justified_slot': 0,
         'justified_block_hash': new Buffer(32),
         'aggregate_sig': [],
-
     }
 
-    constructor(var toSet) {
-      for(var key in fields) {
-        if(fields.hasOwnProperty(key)){
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 }
 
-exports.AttestationSignedData = AttestationSignedData;
+export default AttestationSignedData

@@ -1,8 +1,6 @@
-var exports = module.exports = {};
-
 class AttestationSignedData {
 
-    var fields = {
+    fields = {
         // Chain version
         'version' : 'int64',
         // Slot number
@@ -17,7 +15,7 @@ class AttestationSignedData {
         'justified_slot' : 'int64'
     }
 
-    var defaults = {
+    defaults = {
         'version': 0,
         'slot': 0,
         'shard': 0,
@@ -26,16 +24,17 @@ class AttestationSignedData {
 
     }
 
-    contrusctor(var toSet) {
-      for(var key in fields) {
-        if(fields.hasOwnProperty(key)){
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields.map((key) => {
+            if(this.fields.hasOwnProperty(key)){
+                if(toSet.hasOwnProperty(key)) {
+                    this.key = toSet.key;
+                } else {
+                    this.key = this.defaults.key;
+                }
+            }
+        })
+
     }
 }
 
