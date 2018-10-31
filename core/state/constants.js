@@ -1,0 +1,16 @@
+export const SHARD_COUNT = 1024
+export const DEPOSIT_SIZE = 32
+export const MIN_ONLINE_DEPOSIT_SIZE = 16
+export const GWEI_PER_ETH = 1000000000
+export const MIN_COMMITTEE_SIZE = 128
+export const GENESIS_TIME = "TBD"
+export const SLOT_DURATION = 16
+export const CYCLE_LENGTH = 64
+export const MIN_VALIDATOR_SET_CHANGE_INTERVAL = 256
+export const RANDAO_SLOTS_PER_LAYER = 4096
+export const SQRT_E_DROP_TIME = 65536
+export const WITHDRAWAL_PERIOD = 524288
+export const BASE_REWARD_QUOTIENT = 32768
+export const MAX_VALIDATOR_CHURN_QUOTIENT = 32
+export const LOGOUT_MESSAGE = "LOGOUT"
+export const INITIAL_FORK_VERSION = 0

@@ -1,5 +1,6 @@
 import AttestationRecord from './attestationRecord'
 import SpecialRecord from './specialRecord'
+import { initializeValues } from '../utils/utils'
 
 class ActiveState {
 
@@ -27,15 +28,7 @@ class ActiveState {
     * If a field is not initialized, it will use the default as in this.defaults
     */
     constructor(toSet) {
-        this.fields.keys.map((key) => {
-            if (this.fields.hasOwnProperty(key)) {
-                if (toSet.hasOwnProperty(key)) {
-                    this[key] = toSet[key];
-                } else {
-                    this[key] = this.defaults.key;
-                }
-            }
-        })
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 
     // Returns the number of recent attesters

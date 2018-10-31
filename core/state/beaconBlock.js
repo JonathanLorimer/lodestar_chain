@@ -1,13 +1,13 @@
-var exports = module.exports = {};
-const AttestationRecord = require("./attestationRecord.js");
-const SpecialRecord = require("./specialRecord.js");
+import { initializeValues } from "../utils/utils";
+import { AttestationRecord } from "./attestationRecord"
+import { SpecialRecord } from './specialRecord'
+import Blake from '../utils/blake'
+import ssz from 'ssz'
 
-const Blake = require("../utils/blake.js");
-const ssz = require('ssz');
 
 class BeaconBlock {
 
-    var fields = {
+    fields = {
       // Slot number (for the PoS mechanism)
       'slot_number': 'int64',
       // Randao commitment reveal
@@ -27,7 +27,7 @@ class BeaconBlock {
 
     }
 
-    var defaults = {
+    defaults = {
         'slot_number': 0,
         'randao_reveal': new Buffer(32),
         'pow_chain_ref': new Buffer(32),
@@ -38,25 +38,17 @@ class BeaconBlock {
         'specials' : []
     }
 
-    constructor(var toSet) {
-      for (var key in fields) {
-        if(fields.hasOwnProperty(key)) {
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 
-    function hash() {
+    hash() {
         return Blake.blake(ssz.serialize(this, this));
     }
 
-    function num_attestations() {
-        return this.attestations.length;
+    num_attestations() {
+        return this.fields.attestations.length;
     }
 }
 
-exports.BeaconBlock = BeaconBlock;
+export default BeaconBlock

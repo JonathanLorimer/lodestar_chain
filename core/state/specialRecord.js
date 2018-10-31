@@ -1,15 +1,15 @@
-var exports = module.exports = {};
+import {initializeValues} from "../utils/utils";
 
 class SpecialRecord {
 
-    var fields = {
+    fields = {
       // Kind
       'kind' : 'uint8',
       // Data
       'data': ['bytes']
     };
 
-    var defaults = {
+    defaults = {
       'kind': 0,
       'data': new Buffer()
     };
@@ -18,19 +18,10 @@ class SpecialRecord {
     * Takes in an object with the fields that need to be initialized.
     * If a field is not initialized, it will use the default as in this.defaults
     */
-    constructor(var toSet) {
-      for (var key in fields) {
-        if(fields.hasOwnProperty(key)) {
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
-
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 
 }
 
-exports.SpecialRecord = SpecialRecord;
+export default SpecialRecord

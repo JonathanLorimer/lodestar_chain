@@ -1,5 +1,5 @@
 
-function validateBlock(var block) {
+function validateBlock(block) {
 
 }
 

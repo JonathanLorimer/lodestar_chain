@@ -1,6 +1,6 @@
 import { initializeValues } from '../utils/utils'
 
-class AttestationSignedData{
+class AttestationRecord {
 
     fields = {
         // Slot number
@@ -38,4 +38,4 @@ class AttestationSignedData{
     }
 }
 
-export default AttestationSignedData
+export default AttestationRecord

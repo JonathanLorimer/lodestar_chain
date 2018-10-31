@@ -1,15 +1,15 @@
 // Helper algorithms for the state transition function
-const assert = require('assert');
-const blake = require('../utils/blake.js');
-const ShardAndCommittee = require('./shardAndCommittee.js');
-const ActiveState = require('./activeState.js');
-const AttestationRecord = require('./attestationRecord.js');
-const CrystallizedState = require('./crystallizedState.js');
-const Block = require('./block.js');
-const ValidatorRecord = require('./validatorRecord.js');
-const fs = require('fs');
-const constants = JSON.parse(fs.readFileSync('constants.json', 'utf8'));
-const ValidatorStatusCodes = JSON.parse(fs.readFileSync('validatorStatusCodes.json', 'utf8'));
+import assert from 'assert'
+import blake from '../utils/blake.js'
+import ShardAndCommittee from './shardAndCommittee.js'
+import ActiveState from './activeState.js'
+import AttestationRecord from './attestationRecord.js'
+import CrystallizedState from './crystallizedState.js'
+import Block from './block.js'
+import ValidatorRecord from './validatorRecord.js'
+import fs from 'fs'
+import * as constants from 'constants'
+import * as validatorStatusCodes from 'validatorStatusCodes.js'
 
 function getActiveValidatorIndices(validators) {
     var indexSet = validators.filter(

@@ -1,7 +1,7 @@
-var exports = module.exports = {};
+import {initializeValues} from "../utils/utils";
 
 class ValidatorRecord {
-    var fields = {
+    fields = {
       // The validator's public key
       'pubkey': 'int256',
       // What shard the validator's balance will be sent to after withdrawal
@@ -20,23 +20,15 @@ class ValidatorRecord {
       'exit_slot': 'uint64'
     };
 
-    var defaults = {};
+    defaults = {};
 
     /*
     * Takes in an object with the fields that need to be initialized.
     * If a field is not initialized, it will use the default as in this.defaults
     */
-    constructor(var toSet) {
-      for(var key in fields) {
-        if(fields.hasOwnProperty(key)){
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 }
 
-exports.ValidatorRecord = ValidatorRecord;
+exports default ValidatorRecord

@@ -1,3 +1,5 @@
+import {initializeValues} from "../utils/utils";
+
 class AttestationSignedData {
 
     fields = {
@@ -25,17 +27,8 @@ class AttestationSignedData {
     }
 
     constructor(toSet) {
-        this.fields.map((key) => {
-            if(this.fields.hasOwnProperty(key)){
-                if(toSet.hasOwnProperty(key)) {
-                    this.key = toSet.key;
-                } else {
-                    this.key = this.defaults.key;
-                }
-            }
-        })
-
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 }
 
-exports.AttestationSignedData = AttestationSignedData;
+export default AttestationSignedData;

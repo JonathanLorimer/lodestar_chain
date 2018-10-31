@@ -1,12 +1,14 @@
-var exports = module.exports = {};
+import {initializeValues} from "../utils/utils";
 
-var CrosslinkRecord = require('./crossLinkRecord.js');
-var ValidatorRecord = require('./validatorRecord.js');
-var ShardAndCommittee = require('./shardAndCommittee.js');
+
+import CrosslinkRecord from './crosslinkRecord'
+import ValidatorRecord from './validatorRecord'
+// Not yet implemented
+//import ShardAndCommittee from './shardAndCommitee'
 
 class CrystallizedState {
 
-    var fields = {
+    fields = {
       // Slot of last validator set change
       'validator_set_change_slot': 'uint64',
       // List of validators
@@ -34,8 +36,8 @@ class CrystallizedState {
       'fork_slot_number': 'uint64'
     };
 
-    var defaults = {
-      'validator_set_change_slot': 0
+    defaults = {
+      'validator_set_change_slot': 0,
       'validators': [],
       'crosslinks': [],
       'last_state_recalculation': 0,
@@ -55,27 +57,19 @@ class CrystallizedState {
     * Takes in an object with the fields that need to be initialized.
     * If a field is not initialized, it will use the default as in this.defaults
     */
-    constructor(var toSet) {
-      for (var key in fields) {
-        if(fields.hasOwnProperty(key)) {
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 
     // Returns the number of active validators
-    const function numActiveValidators() {
-      return this.validators.length;
+    numActiveValidators() {
+      return this.fields.validators.length;
     }
 
     // Returns the number of crosslink records
-    const function numCrosslinks() {
-      return this.crosslinks.length;
+    numCrosslinks() {
+      return this.fields.crosslinks.length;
     }
 }
 
-exports.CrystallizedState = CrystallizedState;
+export default CrystallizedState

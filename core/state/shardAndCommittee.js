@@ -1,30 +1,22 @@
-var exports = module.exports = {};
+import {initializeValues} from "../utils/utils";
 
 class ShardAndCommittee {
 
-    var fields = {
+    fields = {
         // The shard ID
         'shard': 'int16',
         // Validator indices
         'committee': ['int24']
     }
 
-    var defaults = {
+    defaults = {
         'shard': 0,
         'committee': []
     }
 
-    constructor(var toSet) {
-      for(var key in fields) {
-        if(fields.hasOwnProperty(key)){
-          if(toSet.hasOwnProperty(key)) {
-            this.key = toSet.key;
-          } else {
-            this.key = defaults.key;
-          }
-        }
-      }
+    constructor(toSet) {
+        this.fields = initializeValues(toSet, this.fields, this.defaults)
     }
 }
 
-exports.ShardAndCommittee = ShardAndCommittee;
+export default ShardAndCommittee
